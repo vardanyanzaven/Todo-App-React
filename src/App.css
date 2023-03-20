@@ -50,7 +50,6 @@ hr {
   display: flex;
   flex-direction: column;
   row-gap: 15px;
-  /* width: fit-content; */
   margin: 35px 0 0 60px;
 }
 
@@ -59,13 +58,13 @@ hr {
   display: inline-flex;
   column-gap: 5px;
   align-items: center;
-  padding: 0 25px 0 30px;
+  padding: 15px 25px 15px 30px;
   border: 1px solid rgb(95, 95, 95);
   border-radius: 8px;
 }
 
 .todo-el-text {
-  margin-right: 27px;
+  margin: 0 27px 0 0;
   font-size: 18px;
   flex-grow: 1;
   overflow-wrap: anywhere;
@@ -84,6 +83,16 @@ hr {
 .todo-el-btn:active {
   background: rgb(60, 60, 60);
 }
+
+.edit-todo-input {
+  height: 26px;
+  border: 2px solid rgb(95, 95, 95);
+  border-radius: 5px;
+  margin-right: 27px;
+  flex-grow: 0.8;
+  font-size: 17px;
+}
+
 
 /* .App {
   text-align: center;

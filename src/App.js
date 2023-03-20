@@ -5,20 +5,16 @@ import TodoList from "./components/TodoList";
 import { v4 as uuidv4 } from "uuid";
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     inputValue: "",
     todoList: [
       {
-        name: "regiurghr",
+        name: "asdasda dsa",
         id: uuidv4(),
         isInEditing: false,
       },
       {
-        name: "fdeujf fdekf rty",
+        name: "qwerw qwer",
         id: uuidv4(),
         isInEditing: false,
       },
@@ -52,11 +48,54 @@ export default class App extends React.Component {
     const delElIndex = this.state.todoList.findIndex((el) => el.id === id);
     const newList = [...this.state.todoList];
     newList.splice(delElIndex, 1);
-    console.log(newList);
     this.setState({
       todoList: newList,
     });
   };
+
+  handleEditOnClick = (id) => {
+    this.setState({
+      todoList: this.state.todoList.map((el) => {
+        if (el.id === id) {
+          return {
+            ...el,
+            isInEditing: true,
+          };
+        }
+        return el;
+      }),
+    });
+    // this.state.todoList[editedElIndex].name = inputValue;
+  };
+
+  handleSaveOnClick = (id, editingValue) => {
+    this.setState({
+      todoList: this.state.todoList.map((listEl) =>
+        listEl.id === id
+          ? {
+              name: editingValue,
+              id,
+              isInEditing: false,
+            }
+          : listEl
+      ),
+    });
+  };
+
+  // handleSaveOnClick = (id) => {
+  //   // this.state.editingValue = this.state.editInputValue;
+  //   this.setState({
+  //     todoList: this.state.todoList.map((el) =>
+  //       el.id === id
+  //         ? {
+  //             name: this.state.editingValue,
+  //             id,
+  //             isInEditing: false,
+  //           }
+  //         : el
+  //     ),
+  //   });
+  // };
 
   render() {
     return (
@@ -74,6 +113,9 @@ export default class App extends React.Component {
         <TodoList
           todoList={this.state.todoList}
           handleDeleteOnClick={this.handleDeleteOnClick}
+          handleEditOnClick={this.handleEditOnClick}
+          handleInputChange={this.handleInputChange}
+          handleSaveOnClick={this.handleSaveOnClick}
         />
       </>
     );
