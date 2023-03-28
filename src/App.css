@@ -12,24 +12,27 @@ body {
   margin-bottom: 20px;
 }
 
+/* Add to-do section styles */
+
 .add-todo-form {
   display: flex;
   flex-direction: row;
-  column-gap: 13px;
+  column-gap: 8px;
 }
 
 .add-todo-input {
   height: 25px;
-  border: 2px solid rgb(95, 95, 95);
+  border: 2px solid rgb(0, 123, 76);
   border-radius: 4px;
   padding: 4px 0 4px 10px;
   font-size: 15px;
+  outline: none;
 }
 
 .add-todo-btn {
-  padding: 0 18px;
+  padding: 0 28px;
   font-size: 15px;
-  background: rgb(95, 95, 95);
+  background: rgb(1, 60, 46);
   color: white;
   border: none;
   border-radius: 4px;
@@ -38,12 +41,12 @@ body {
 }
 
 .add-todo-btn:active {
-  background: rgb(60, 60, 60);
+  background: rgb(0, 86, 63);
 }
 
 hr {
   height: 3px;
-  background: rgb(95, 95, 95);
+  background: rgb(0, 68, 50);
 }
 
 .todo-list {
@@ -53,82 +56,110 @@ hr {
   margin: 35px 0 0 60px;
 }
 
+/* Searchbar styles */
+
+.todo-search-bar {
+  margin: 20px 0 0 60px;
+  border: 3px solid rgb(0, 106, 81);
+  border-radius: 6px;
+  padding: 7px 0 7px 15px;
+  font-size: 16px;
+  color: rgb(1, 60, 46);
+  outline: none;
+}
+
+.todo-search-bar::placeholder {
+  color: rgb(1, 60, 46);
+}
+
+/* Filter section styles */
+
+.filter-todos-div {
+  width: fit-content;
+  display: flex;
+  column-gap: 8px;
+  margin: 30px 0 0 60px;
+  align-items: center;
+}
+
+.filter-text {
+  margin: 0 4px 5px 0;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.filter-option-btn {
+  height: 33px;
+  padding: 6px 20px;
+  font-size: 16px;
+  background: transparent;
+  border: 2px solid rgb(1, 60, 46);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+}
+
+.filter-option-btn:active {
+  background: rgb(0, 86, 63);
+  color: white;
+}
+
+.active-filter-btn {
+  background: rgb(1, 60, 46);
+  color: white;
+}
+
+/* To-do element styles */
+
 .todo-el {
   width: 325px;
   display: inline-flex;
   column-gap: 5px;
   align-items: center;
   padding: 15px 25px 15px 30px;
-  border: 1px solid rgb(95, 95, 95);
+  border: 1px solid rgb(0, 123, 76);
   border-radius: 8px;
 }
 
+.todo-el-check {
+  accent-color: rgb(2, 151, 104);
+  margin: 5px 0 0 0;
+  transform: scale(1.5);
+  flex-grow: 0.2;
+  cursor: pointer;
+}
+
 .todo-el-text {
-  margin: 0 27px 0 0;
+  margin: 0 10px 0 15px;
   font-size: 18px;
-  flex-grow: 1;
+  flex-grow: 0.9;
   overflow-wrap: anywhere;
 }
+
 
 .todo-el-btn {
   font-size: 15px;
   color: white;
-  background: rgb(95, 95, 95);
+  background: rgb(0, 68, 50);
   border: none;
   border-radius: 4px;
   padding: 7px 13px;
   cursor: pointer;
+  transition: background 0.1s;
 }
 
 .todo-el-btn:active {
-  background: rgb(60, 60, 60);
+  background: rgb(0, 86, 63);
 }
 
 .edit-todo-input {
   height: 26px;
-  border: 2px solid rgb(95, 95, 95);
+  border: 2px solid rgb(0, 86, 63);
   border-radius: 5px;
   margin-right: 27px;
+  padding-left: 17px;
   flex-grow: 0.8;
   font-size: 17px;
+  outline: none;
 }
 
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */

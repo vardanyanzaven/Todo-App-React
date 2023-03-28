@@ -9,23 +9,23 @@ export default class App extends React.Component {
     inputValue: "",
     todoList: [
       {
-        name: "asdasda dsa",
+        name: "Feed the dog",
         id: uuidv4(),
-        isInEditing: false,
+        isCompleted: false,
       },
       {
-        name: "qwerw qwer",
+        name: "Go shopping",
         id: uuidv4(),
-        isInEditing: false,
+        isCompleted: false,
       },
     ],
+    filteredToDoList: [],
   };
 
   handleInputChange = (e) => {
     this.setState({
       inputValue: e.target.value,
     });
-    console.log(this.state.inputValue);
   };
 
   handleAddOnClick = (e) => {
@@ -37,7 +37,7 @@ export default class App extends React.Component {
         {
           name: this.state.inputValue,
           id: uuidv4(),
-          isInEditing: false,
+          isCompleted: false,
         },
       ],
       inputValue: "",
@@ -53,49 +53,32 @@ export default class App extends React.Component {
     });
   };
 
-  handleEditOnClick = (id) => {
-    this.setState({
-      todoList: this.state.todoList.map((el) => {
-        if (el.id === id) {
-          return {
-            ...el,
-            isInEditing: true,
-          };
-        }
-        return el;
-      }),
-    });
-    // this.state.todoList[editedElIndex].name = inputValue;
-  };
-
   handleSaveOnClick = (id, editingValue) => {
+    console.log(editingValue);
     this.setState({
       todoList: this.state.todoList.map((listEl) =>
         listEl.id === id
           ? {
+              ...listEl,
               name: editingValue,
-              id,
-              isInEditing: false,
             }
           : listEl
       ),
     });
   };
 
-  // handleSaveOnClick = (id) => {
-  //   // this.state.editingValue = this.state.editInputValue;
-  //   this.setState({
-  //     todoList: this.state.todoList.map((el) =>
-  //       el.id === id
-  //         ? {
-  //             name: this.state.editingValue,
-  //             id,
-  //             isInEditing: false,
-  //           }
-  //         : el
-  //     ),
-  //   });
-  // };
+  handleCheckboxChange = (id) => {
+    this.setState({
+      todoList: this.state.todoList.map((listEl) =>
+        listEl.id === id
+          ? {
+              ...listEl,
+              isCompleted: !listEl.isCompleted,
+            }
+          : listEl
+      ),
+    });
+  };
 
   render() {
     return (
@@ -113,30 +96,13 @@ export default class App extends React.Component {
         <TodoList
           todoList={this.state.todoList}
           handleDeleteOnClick={this.handleDeleteOnClick}
-          handleEditOnClick={this.handleEditOnClick}
-          handleInputChange={this.handleInputChange}
           handleSaveOnClick={this.handleSaveOnClick}
+          handleCheckboxChange={this.handleCheckboxChange}
+          handleFilterChange={(e) => {
+            this.handleFilterChange(e);
+          }}
         />
       </>
     );
   }
-}
-
-{
-  /* <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-</div> */
 }

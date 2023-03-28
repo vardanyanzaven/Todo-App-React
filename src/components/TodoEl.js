@@ -1,56 +1,77 @@
 import React from "react";
 
 export default class TodoEl extends React.Component {
-
   state = {
+    isInEditing: false,
     editingValue: this.props.name,
-    editInputValue: this.props.name
-  }
+    editInputValue: this.props.name,
+  };
+
+  handleEditOnClick = () => {
+    this.setState({
+      isInEditing: true,
+    });
+  };
 
   handleEditInputChange = (e) => {
     this.setState({
-      editInputValue: e.target.value
-    })
-  }
+      editInputValue: e.target.value,
+    });
+  };
 
   render() {
+    const { id, isCompleted, handleDeleteOnClick, handleSaveOnClick, handleCheckboxChange} = this.props;
     return (
       <div className="todo-el">
-        {this.props.isInEditing ? (
-          <input type="text" className="edit-todo-input" value={this.state.editInputValue} onChange={(e) => this.handleEditInputChange(e)}/>
+        {this.state.isInEditing ? (
+          <input
+            type="text"
+            className="edit-todo-input"
+            value={this.state.editInputValue}
+            onChange={(e) => this.handleEditInputChange(e)}
+          />
         ) : (
-          <p className="todo-el-text">{this.props.name}</p>
+          <>
+            <input 
+              type="checkbox" className="todo-el-check"
+              checked={isCompleted ? true : false}
+              onChange={() => handleCheckboxChange(id)}
+            />
+            <p className="todo-el-text" style={{textDecorationLine: isCompleted ? "line-through" : "none"}}>{this.state.editingValue}
+            </p>
+          </>
         )}
-        {/* <p className="todo-el-text">{this.props.name}</p> */}
-        {
-          this.props.isInEditing ? (
-            <button 
+        {this.state.isInEditing ? (
+          <button
             className="todo-el-btn"
             onClick={() => {
-              this.state.editingValue = this.state.editInputValue;
-              this.props.handleSaveOnClick(this.props.id, this.state.editingValue)
-              }
-            }
-            >
+              this.setState({
+                editingValue: this.state.editInputValue,
+              });
+              handleSaveOnClick(id, this.state.editingValue);
+              this.setState({
+                isInEditing: false,
+              });
+            }}
+          >
             Save
           </button>
-          ) : (
-            <>
-              <button 
+        ) : (
+          <>
+            <button
               className="todo-el-btn"
-              onClick={() => this.props.handleEditOnClick(this.props.id)}
+              onClick={() => this.handleEditOnClick(id)}
             >
               Edit
             </button>
             <button
               className="todo-el-btn"
-              onClick={() => this.props.handleDeleteOnClick(this.props.id)}
+              onClick={() => handleDeleteOnClick(id)}
             >
               Delete
             </button>
-            </>
-          )
-        }
+          </>
+        )}
       </div>
     );
   }
